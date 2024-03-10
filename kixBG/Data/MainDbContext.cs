@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace kixBG.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class MainDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public MainDbContext(DbContextOptions<MainDbContext> options)
             : base(options)
         {
         }
