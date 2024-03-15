@@ -1,4 +1,4 @@
-﻿using kixBG.Data;
+﻿using kixBG.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
