@@ -18,6 +18,11 @@ namespace kixBG.Controllers
             return View();
         }
 
+        public IActionResult All()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
