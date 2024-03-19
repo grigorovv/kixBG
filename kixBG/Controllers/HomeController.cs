@@ -18,12 +18,22 @@ namespace kixBG.Controllers
             return View();
         }
 
-        public IActionResult All()
+        public IActionResult Contacts()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Shop()
+        {
+            return View();
+        }
+
+        public IActionResult Faq()
         {
             return View();
         }
