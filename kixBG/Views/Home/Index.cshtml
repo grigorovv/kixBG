@@ -98,7 +98,7 @@ https://templatemo.com/tm-559-zay-shop
                                 <h1 class="h1">Enjoying your experience?</h1>
                                 <h3 class="h2">Help us out!</h3>
                                 <p>
-                                    Donate to our <a href="#" class="text-success">PayPal</a> or spread the word!
+                                    Donate to our <a href="www.paypal.com/" class="text-success">PayPal</a> or spread the word!
                                 </p>
                             </div>
                         </div>
@@ -128,19 +128,19 @@ https://templatemo.com/tm-559-zay-shop
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="~/img/nike-tech.jpg" class="rounded-circle img-fluid border"></a>
+                <a asp-controller="Clothes" asp-action="Sports"><img src="~/img/nike-tech.jpg" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Sport Wear</h5>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a asp-controller="Clothes" asp-action="Sports" class="btn btn-success">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="~/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
+                <a asp-controller="Shoes" asp-action="All"><img src="~/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a asp-controller="Shoes" asp-action="All" class="btn btn-success">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="~/img/dior-set.jpg" class="rounded-circle img-fluid border"></a>
+                <a asp-controller="Clothes" asp-action="All"><img src="~/img/dior-set.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Clothes</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a asp-controller="Clothes" asp-action="All" class="btn btn-success">Go Shop</a></p>
             </div>
         </div>
     </section>
