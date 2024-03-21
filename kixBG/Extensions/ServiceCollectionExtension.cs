@@ -1,4 +1,6 @@
-﻿using kixBG.Infrastructure.Data;
+﻿using kixBG.Core.Contracts;
+using kixBG.Core.Services;
+using kixBG.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +10,9 @@ namespace kixBG.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IShoesService, ShoesService>();
+            services.AddScoped<IClothesService, ClothesService>();
+
             return services;
         }
 

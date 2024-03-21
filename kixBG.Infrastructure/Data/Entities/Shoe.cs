@@ -13,6 +13,10 @@ namespace kixBG.Infrastructure.Data.Entities
         public int Id { get; set; }
 
         [Required]
+        [Comment("URL of item image")]
+        public string ImageURL { get; set; } = string.Empty;
+
+        [Required]
         [Comment("Brand identifier of item")]
         public int BrandId { get; set; }
 
