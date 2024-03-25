@@ -19,8 +19,7 @@ namespace kixBG.Controllers
 
         public async Task<IActionResult> All()
         {
-            List<ClothesAllModel> allModel = new List<ClothesAllModel>();
-            allModel = await clothesService.GetAllAsync();
+            List<ClothesAllModel> allModel = await clothesService.GetAllAsync();
 
             return View(allModel);
         }

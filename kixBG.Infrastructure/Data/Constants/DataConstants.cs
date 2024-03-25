@@ -18,6 +18,9 @@
         public const int sellerPhoneNumberMinLength = 7;
 
         public const int shoeModelNameMaxLength = 40;
+        public const int shoeModelNameMinLength = 5;
+        public const string shoeMaxSize = "49";
+        public const string shoeMinSize = "35";
 
         public const string minimumPrice = "0";
         public const string maximumPrice = "100001";

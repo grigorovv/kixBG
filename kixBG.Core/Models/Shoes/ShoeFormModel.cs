@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using static kixBG.Infrastructure.Data.Constants.DataConstants;
 using static kixBG.Infrastructure.Data.Constants.StringConstants;
 
-namespace kixBG.Core.Models.Clothes
+namespace kixBG.Core.Models.Shoes
 {
-    public class ClothesFormModel
+    public class ShoeFormModel
     {
         [Required(ErrorMessage = requiredMessage)]
         public string ImageURL { get; set; } = null!;
@@ -21,9 +21,6 @@ namespace kixBG.Core.Models.Clothes
         public string Model { get; set; } = null!;
 
         [Required(ErrorMessage = requiredMessage)]
-        public int CategoryId { get; set; }
-
-        [Required(ErrorMessage = requiredMessage)]
         [Range(typeof(decimal),
             minimumPrice,
             maximumPrice,
@@ -32,16 +29,15 @@ namespace kixBG.Core.Models.Clothes
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = requiredMessage)]
-        [StringLength(clothesSizeMaxLength,
-            MinimumLength = 1,
-            ErrorMessage = lengthErrorMessage)]
-        public string Size { get; set; } = null!;
+        [Range(typeof(int),
+            shoeMinSize, 
+            shoeMaxSize,
+            ErrorMessage = shoeSizeErrorMessage)]
+        public int Size { get; set; }
 
         [Required(ErrorMessage = requiredMessage)]
         public int Condition { get; set; }
 
-        public IEnumerable<ClothesCategoryServiceModel> Categories { get; set; } = new List<ClothesCategoryServiceModel>();
         public IEnumerable<BrandsServiceModel> Brands { get; set; } = new List<BrandsServiceModel>();
-
     }
 }
