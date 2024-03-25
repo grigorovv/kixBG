@@ -21,6 +21,6 @@ namespace kixBG.Core.Models.Seller
         public string PhoneNumber { get; set; } = null!;
 
         [Required(ErrorMessage = requiredMessage)]
-        public int CityId { get; set; }
+        public string City { get; set; } = null!;
     }
 }
