@@ -44,5 +44,13 @@ namespace kixBG.Core.Services
             await repository.AddAsync(sellerToAdd);
             await repository.SaveChangesAsync();
         }
+
+        public async Task<int> GetSellerIdByUserId(string userId)
+        {
+            return await repository.AllReadOnly<Seller>()
+                .Where(s => s.UserId == userId)
+                .Select(s => s.Id)
+                .FirstAsync();
+        }
     }
 }

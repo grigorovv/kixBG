@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using kixBG.Infrastructure.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace kixBG.Infrastructure.Data.Common.Repository
 {
     public class Repository : IRepository
     {
-        private readonly DbContext dbContext;
+        private readonly MainDbContext dbContext;
 
         public Repository(MainDbContext dbContext)
         {
@@ -33,6 +34,13 @@ namespace kixBG.Infrastructure.Data.Common.Repository
         public async Task<int> SaveChangesAsync()
         {
             return await dbContext.SaveChangesAsync();
+        }
+
+        public IQueryable<int> FindCityByName(string name)
+        {
+            return  dbContext.Cities
+                .Where(c => c.Name == name)
+                .Select(c => c.Id);
         }
     }
 }
