@@ -17,9 +17,12 @@ namespace kixBG.Controllers
             this.sellerService = sellerService;
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            return View();
+            List<ClothesAllModel> allModel = new List<ClothesAllModel>();
+            allModel = await clothesService.GetAllAsync();
+
+            return View(allModel);
         }
 
         [HttpGet]
@@ -55,7 +58,7 @@ namespace kixBG.Controllers
 
             clothesService.AddAsync(clotheToAdd);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("Index", "Home");
         }
     }
 }

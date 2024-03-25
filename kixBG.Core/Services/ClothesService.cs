@@ -1,5 +1,6 @@
 ﻿using kixBG.Core.Contracts;
 using kixBG.Core.Models.Brands;
+using kixBG.Core.Models.Clothes;
 using kixBG.Core.Models.ClothesCategories;
 using kixBG.Infrastructure.Data.Common;
 using kixBG.Infrastructure.Data.Entities;
@@ -40,6 +41,20 @@ namespace kixBG.Core.Services
                 {
                     Id = cc.Id,
                     Name = cc.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<ClothesAllModel>> GetAllAsync()
+        {
+            return await repository.All<Clothe>()
+                .Select(c => new ClothesAllModel()
+                {
+                    Id = c.Id,
+                    Model = c.Model,
+                    ImageURL = c.ImageURL,
+                    Price = c.Price,
+                    Size = c.Size
                 })
                 .ToListAsync();
         }
