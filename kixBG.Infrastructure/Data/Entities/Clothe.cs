@@ -39,7 +39,7 @@ namespace kixBG.Infrastructure.Data.Entities
 
         [Required]
         [Comment("Item size")]
-        public string Size { get; set; } = string.Empty; //s View da go napravq spored kategoriqta da e dropdown s razmeri
+        public string Size { get; set; } = string.Empty;
 
         [Required]
         [Comment("Item condition on a scale of 1-10")]

@@ -15,6 +15,7 @@ namespace kixBG.Extensions.DependencyInjection
             services.AddScoped<IShoesService, ShoesService>();
             services.AddScoped<IClothesService, ClothesService>();
             services.AddScoped<ISellerService, SellerService>();
+            services.AddScoped<ICityService, CityService>();
 
             return services;
         }

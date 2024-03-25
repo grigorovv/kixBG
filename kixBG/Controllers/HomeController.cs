@@ -18,7 +18,7 @@ namespace kixBG.Controllers
             return View();
         }
 
-        public IActionResult Contacts()
+        public IActionResult ListingCategory()
         {
             return View();
         }
