@@ -23,12 +23,25 @@ namespace kixBG.Controllers
                 return BadRequest();
             }
 
-            return View();
+            BecomeSellerFormModel model = new BecomeSellerFormModel();
+
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Become(BecomeSellerFormModel model)
         {
+            if (await service.PhoneNumberTaken(model.PhoneNumber))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await service.AddAsync(User.Id(), model.Name, model.PhoneNumber, model.CityId);
             return RedirectToAction(nameof(HomeController.Index));
         }
     }

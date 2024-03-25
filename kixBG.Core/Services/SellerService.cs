@@ -31,7 +31,7 @@ namespace kixBG.Core.Services
             return await repository.AllReadOnly<Seller>()
                 .AnyAsync(s => s.PhoneNumber == phoneNumber);
         }
-        public async Task Add(string userId, string fullName, string phoneNumber, int cityId)
+        public async Task AddAsync(string userId, string fullName, string phoneNumber, int cityId)
         {
             Seller sellerToAdd = new Seller()
             {

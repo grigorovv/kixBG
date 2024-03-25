@@ -1,6 +1,8 @@
 ﻿using kixBG.Core.Contracts;
 using kixBG.Core.Services;
 using kixBG.Infrastructure.Data;
+using kixBG.Infrastructure.Data.Common;
+using kixBG.Infrastructure.Data.Common.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,7 @@ namespace kixBG.Extensions.DependencyInjection
         {
             services.AddScoped<IShoesService, ShoesService>();
             services.AddScoped<IClothesService, ClothesService>();
+            services.AddScoped<ISellerService, SellerService>();
 
             return services;
         }
@@ -21,6 +24,8 @@ namespace kixBG.Extensions.DependencyInjection
             var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<MainDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
