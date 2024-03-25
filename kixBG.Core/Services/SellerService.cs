@@ -1,4 +1,7 @@
 ﻿using kixBG.Core.Contracts;
+using kixBG.Infrastructure.Data.Common;
+using kixBG.Infrastructure.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +12,37 @@ namespace kixBG.Core.Services
 {
     public class SellerService : ISellerService
     {
-        public Task<bool> ExistsById(string userId)
+        private readonly IRepository repository;
+
+        public SellerService(IRepository _repository)
         {
-            throw new NotImplementedException();
+            repository = _repository;
         }
 
-        public Task<bool> PhoneNumberTaken(string phoneNumber)
+
+        public async Task<bool> ExistsById(string userId)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<Seller>()
+                .AnyAsync(s => s.UserId == userId);
+        }
+
+        public async Task<bool> PhoneNumberTaken(string phoneNumber)
+        {
+            return await repository.AllReadOnly<Seller>()
+                .AnyAsync(s => s.PhoneNumber == phoneNumber);
+        }
+        public async Task Add(string userId, string fullName, string phoneNumber, int cityId)
+        {
+            Seller sellerToAdd = new Seller()
+            {
+                UserId = userId,
+                Name = fullName,
+                PhoneNumber = phoneNumber,
+                CityId = cityId
+            };
+
+            await repository.AddAsync(sellerToAdd);
+            await repository.SaveChangesAsync();
         }
     }
 }

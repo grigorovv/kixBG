@@ -10,5 +10,6 @@ namespace kixBG.Core.Contracts
     {
         Task<bool> ExistsById(string userId);
         Task<bool> PhoneNumberTaken(string phoneNumber);
+        Task Add(string userId, string fullName, string phoneNumber, int cityId);
     }
 }

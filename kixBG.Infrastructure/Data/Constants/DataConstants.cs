@@ -10,8 +10,10 @@
          
         public const int countryNameMaxLength = 25;
         
-        public const int sellerNameMaxLength = 30;
+        public const int sellerNameMaxLength = 40;
+        public const int sellerNameMinLength = 4;
         public const int sellerPhoneNumberMaxLength = 15;
+        public const int sellerPhoneNumberMinLength = 7;
 
         public const int shoeModelNameMaxLength = 40;
     }
