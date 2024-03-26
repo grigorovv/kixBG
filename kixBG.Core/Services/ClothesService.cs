@@ -45,6 +45,8 @@ namespace kixBG.Core.Services
                 .ToListAsync();
         }
 
+      
+
         public async Task<List<ClothesAllModel>> GetAllAsync()
         {
             return await repository.All<Clothe>()
@@ -69,6 +71,11 @@ namespace kixBG.Core.Services
         public void SaveChangesAsync()
         {
             repository.SaveChangesAsync();
+        }
+
+        public void DeleteItem(Clothe clotheToDelete)
+        {
+            repository.DeleteItem(clotheToDelete);
         }
     }
 }

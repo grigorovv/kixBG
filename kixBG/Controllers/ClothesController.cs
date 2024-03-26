@@ -1,7 +1,10 @@
 ﻿using kixBG.Core.Contracts;
+using kixBG.Core.Models.Brands;
 using kixBG.Core.Models.Clothes;
+using kixBG.Core.Models.ClothesCategories;
 using kixBG.Extensions;
 using kixBG.Infrastructure.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace kixBG.Controllers
@@ -24,6 +27,7 @@ namespace kixBG.Controllers
             return View(allModel);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -57,9 +61,10 @@ namespace kixBG.Controllers
 
             clothesService.AddAsync(clotheToAdd);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -77,6 +82,8 @@ namespace kixBG.Controllers
             ClothesFormModel formModel = new ClothesFormModel
             {
                 Id = id,
+                BrandId = clotheToEdit.BrandId,
+                CategoryId = clotheToEdit.CategoryId,
                 ImageURL = clotheToEdit.ImageURL,
                 Model = clotheToEdit.Model,
                 Condition = clotheToEdit.Condition,
@@ -107,6 +114,57 @@ namespace kixBG.Controllers
             clotheToEdit.CategoryId = formModel.CategoryId;
 
             clothesService.SaveChangesAsync();
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            Clothe clotheToCheck = await clothesService.GetItemByIdAsync(id);
+
+            if (clotheToCheck == null)
+            {
+                return NotFound();
+            }
+            
+
+            IEnumerable<BrandsServiceModel> brands = await clothesService.AllBrandsAsync();
+            string brandName = brands.Where(b => b.Id == clotheToCheck.BrandId)
+                .Select(b => b.Name)
+                .First();
+
+            IEnumerable<ClothesCategoryServiceModel> categories = await clothesService.AllCategoriesAsync();
+            string categoryName = categories.Where(c => c.Id == clotheToCheck.CategoryId)
+                .Select(b => b.Name)
+                .First();
+
+            ClothesDetailModel detailModel = new ClothesDetailModel()
+            {
+                Id = id,
+                ImageURL = clotheToCheck.ImageURL,
+                Model = clotheToCheck.Model,
+                Brand = brandName,
+                Category = categoryName,
+                Condition = clotheToCheck.Condition,
+                Size = clotheToCheck.Size,
+                Price = clotheToCheck.Price,
+                SellerUserId = await sellerService.GetUserIdBySellerId(clotheToCheck.SellerId)
+            };
+
+            return View(detailModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Clothe clotheToDelete = await clothesService.GetItemByIdAsync(id);
+            if (clotheToDelete.SellerId != await sellerService.GetSellerIdByUserId(User.Id()))
+            {
+                return Unauthorized();
+            }
+            clothesService.DeleteItem(clotheToDelete);
 
             return RedirectToAction(nameof(All));
         }

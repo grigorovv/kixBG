@@ -42,5 +42,11 @@ namespace kixBG.Infrastructure.Data.Common.Repository
                 .Where(c => c.Name == name)
                 .Select(c => c.Id);
         }
+
+        public void DeleteItem<T>(T entity) where T : class
+        {
+            dbContext.Remove(entity);
+            dbContext.SaveChanges();
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace kixBG.Infrastructure.Data.Common
         IQueryable<int> FindCityByName(string name);
         Task AddAsync<T>(T entity) where T : class;
         Task<int> SaveChangesAsync();
+        void DeleteItem<T>(T entity) where T : class;
     }
 }

@@ -61,31 +61,6 @@
             </div>
 
             <div class="col-lg-9">
-                @*<div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-inline shop-top-menu pb-3 pt-1">
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 pb-4">
-                        <div class="d-flex">
-                            <select class="form-control">
-                                <option>Featured</option>
-                                <option>A to Z</option>
-                                <option>Item</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>*@
-
 
                 <div class="row">
                     @foreach(var c in Model) 
@@ -96,12 +71,12 @@
                                     <img class="card-img rounded-0 img-fluid" src="@c.ImageURL">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
+                                            <li><a asp-controller="Clothes" asp-action="Details" asp-route-id="@c.Id" class="btn btn-success text-white mt-2" ><i class="far fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <a href="shop-single.html" class="h3 text-decoration-none">@c.Model</a> @*title*@
+                                    <a asp-controller="Clothes" asp-action="Details" asp-route-id="@c.Id" class="h3 text-decoration-none" >@c.Model</a> @*title*@
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                         <li class="pt-2">
                                             <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>

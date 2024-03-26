@@ -57,5 +57,10 @@ namespace kixBG.Core.Services
                 .Where(s => s.Id == id)
                 .FirstOrDefaultAsync();
         }
+
+        public void DeleteItem(Shoe shoeToDelete)
+        {
+            repository.DeleteItem(shoeToDelete);
+        }
     }
 }

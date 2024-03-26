@@ -16,5 +16,6 @@ namespace kixBG.Core.Contracts
         Task<List<ShoeAllModel>> GetAllAsync();
         Task<Shoe> GetShoeByIdAsync(int id);
         void SaveChangesAsync();
+        void DeleteItem(Shoe shoeToDelete);
     }
 }

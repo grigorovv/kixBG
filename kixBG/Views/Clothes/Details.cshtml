@@ -1,0 +1,61 @@
+﻿@model ClothesDetailModel
+
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    <img class="card-img img-fluid" src="@Model.ImageURL" alt="Card image cap" id="product-detail">
+                </div>
+            </div>
+
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">@Model.Model</h1>
+                        <p class="h3 py-2">@Model.Price BGN</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Brand:</h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="text-muted"><strong>@Model.Brand</strong></p>
+                            </li>
+                        </ul>
+
+                        <h6>Category:</h6>
+                        <p>@Model.Category</p>
+
+                        <h6>Specifics:</h6>
+                        <ul class="list-unstyled pb-3">
+                            <li>Size: @if(Model.Size == "0")
+                                {
+                                    <strong>-</strong>
+                                }
+                                else
+                                {
+                                    <strong>@Model.Size</strong>
+                                }
+                            </li>
+                            <li>Condition: <strong>@Model.Condition</strong>/10</li>
+                        </ul>
+
+                        <div class="row pb-3">
+                            <div class="col d-grid">
+                                <a asp-controller="Seller" asp-action="Profile" asp-route-id="@Model.SellerUserId" class="btn btn-success btn-lg">Contact Seller</a>
+                            </div>
+
+                            @if (@Model.SellerUserId == User.Id())
+                            {
+                                <div class="col d-grid">
+                                    <a asp-controller="Clothes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-lg"><strong>Edit</strong></a>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

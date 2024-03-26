@@ -12,5 +12,6 @@ namespace kixBG.Core.Contracts
         Task<bool> PhoneNumberTaken(string phoneNumber);
         Task AddAsync(string userId, string fullName, string phoneNumber, int cityId);
         Task<int> GetSellerIdByUserId(string userId);
+        Task<string> GetUserIdBySellerId(int sellerId);
     }
 }

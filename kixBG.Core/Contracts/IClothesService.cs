@@ -13,5 +13,6 @@ namespace kixBG.Core.Contracts
         Task<List<ClothesAllModel>> GetAllAsync();
         Task<Clothe> GetItemByIdAsync(int id);
         void SaveChangesAsync();
+        void DeleteItem(Clothe clotheToDelete);
     }
 }
