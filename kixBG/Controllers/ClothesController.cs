@@ -150,7 +150,8 @@ namespace kixBG.Controllers
                 Condition = clotheToCheck.Condition,
                 Size = clotheToCheck.Size,
                 Price = clotheToCheck.Price,
-                SellerUserId = await sellerService.GetUserIdBySellerId(clotheToCheck.SellerId)
+                SellerUserId = await sellerService.GetUserIdBySellerId(clotheToCheck.SellerId),
+                SellerId = clotheToCheck.SellerId
             };
 
             return View(detailModel);

@@ -54,7 +54,7 @@ namespace kixBG.Controllers
             shoeToAdd.Price = formModel.Price;
 
             shoesService.AddAsync(shoeToAdd);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
         [Authorize]
@@ -133,6 +133,7 @@ namespace kixBG.Controllers
                 Condition = shoeToCheck.Condition,
                 Size = shoeToCheck.Size,
                 Price = shoeToCheck.Price,
+                SellerId = shoeToCheck.SellerId,
                 SellerUserId = await sellerService.GetUserIdBySellerId(shoeToCheck.SellerId)
             };
 

@@ -1,6 +1,9 @@
 ﻿using kixBG.Core.Contracts;
+using kixBG.Core.Models.Clothes;
 using kixBG.Core.Models.Seller;
+using kixBG.Core.Models.Shoes;
 using kixBG.Extensions;
+using kixBG.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,16 +11,20 @@ using System.Security.Claims;
 
 namespace kixBG.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class SellerController : Controller
     {
         private ISellerService sellerService;
         private ICityService cityService;
+        private IClothesService clothesService;
+        private IShoesService shoesService;
 
-        public SellerController(ISellerService sellerService, ICityService cityService)
+        public SellerController(ISellerService sellerService, ICityService cityService, IClothesService clothesService, IShoesService shoesService)
         {
             this.sellerService = sellerService;
             this.cityService = cityService;
+            this.clothesService = clothesService;
+            this.shoesService = shoesService;
         }
 
         [HttpGet]
@@ -51,6 +58,25 @@ namespace kixBG.Controllers
 
             await sellerService.AddAsync(User.Id(), model.Name, model.PhoneNumber, cityId);
             return RedirectToAction(nameof(HomeController.Index));
+        }
+
+        public async Task<IActionResult> Profile(int id)
+        {
+            Seller sellerToView = await sellerService.GetSellerById(id);
+            if (sellerToView == null)
+            {
+                return BadRequest();
+            }
+
+            List<ShoeAllModel> sellerShoes = await shoesService.GetAllAsync();
+            sellerShoes = sellerShoes.Where(s => s.SellerId == sellerToView.Id).ToList();
+
+            List<ClothesAllModel> sellerClothes = await clothesService.GetAllAsync();
+            sellerClothes = sellerClothes.Where(c => c.SellerId == sellerToView.Id).ToList();
+
+            SellerProfileModel spm = new SellerProfileModel(sellerToView, sellerShoes, sellerClothes);
+
+            return View(spm);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using kixBG.Infrastructure.Data.Entities;
 
 namespace kixBG.Core.Contracts
 {
@@ -13,5 +9,6 @@ namespace kixBG.Core.Contracts
         Task AddAsync(string userId, string fullName, string phoneNumber, int cityId);
         Task<int> GetSellerIdByUserId(string userId);
         Task<string> GetUserIdBySellerId(int sellerId);
+        Task<Seller> GetSellerById(int userId);
     }
 }

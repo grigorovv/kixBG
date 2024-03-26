@@ -13,5 +13,6 @@ namespace kixBG.Core.Models.Shoes
         public string Model { get; set; } = null!;
         public string Size { get; set; } = null!;
         public decimal Price { get; set; }
+        public int SellerId { get; set; }
     }
 }

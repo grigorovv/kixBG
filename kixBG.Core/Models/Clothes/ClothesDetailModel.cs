@@ -16,6 +16,7 @@ namespace kixBG.Core.Models.Clothes
         public string Category { get; set; } = null!;
         public string? Size { get; set; }
         public int Condition { get; set; }
-        public string SellerUserId { get; set; } = null!;
+        public int SellerId { get; set; }
+        public string SellerUserId { get; set; }
     }
 }

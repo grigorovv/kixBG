@@ -34,7 +34,7 @@
 
                         <div class="row pb-3">
                             <div class="col d-grid">
-                                <a asp-controller="Seller" asp-action="Profile" asp-route-id="@Model.SellerUserId" class="btn btn-success btn-lg">Contact Seller</a>
+                                <a asp-controller="Seller" asp-action="Profile" asp-route-Id="@Model.SellerId" class="btn btn-success btn-lg">Contact Seller</a>
                             </div>
 
                             @if (@Model.SellerUserId == User.Id())

@@ -56,7 +56,8 @@ namespace kixBG.Core.Services
                     Model = c.Model,
                     ImageURL = c.ImageURL,
                     Price = c.Price,
-                    Size = c.Size
+                    Size = c.Size,
+                    SellerId = c.SellerId
                 })
                 .ToListAsync();
         }
