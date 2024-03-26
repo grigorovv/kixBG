@@ -59,5 +59,56 @@ namespace kixBG.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            Clothe clotheToEdit = await clothesService.GetItemByIdAsync(id);
+
+            if (clotheToEdit == null)
+            {
+                return NotFound();
+            }
+            if (clotheToEdit.SellerId != await sellerService.GetSellerIdByUserId(User.Id()))
+            {
+                return Unauthorized();
+            }
+
+            ClothesFormModel formModel = new ClothesFormModel
+            {
+                Id = id,
+                ImageURL = clotheToEdit.ImageURL,
+                Model = clotheToEdit.Model,
+                Condition = clotheToEdit.Condition,
+                Price = clotheToEdit.Price,
+                Size = clotheToEdit.Size,
+                Brands = await clothesService.AllBrandsAsync(),
+                Categories = await clothesService.AllCategoriesAsync()
+            };
+            return View(formModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ClothesFormModel formModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(formModel);
+            }
+
+            Clothe clotheToEdit = await clothesService.GetItemByIdAsync(formModel.Id);
+
+            clotheToEdit.ImageURL = formModel.ImageURL;
+            clotheToEdit.Model = formModel.Model;
+            clotheToEdit.Condition = formModel.Condition;
+            clotheToEdit.Price = formModel.Price;
+            clotheToEdit.Size = formModel.Size;
+            clotheToEdit.BrandId = formModel.BrandId;
+            clotheToEdit.CategoryId = formModel.CategoryId;
+
+            clothesService.SaveChangesAsync();
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

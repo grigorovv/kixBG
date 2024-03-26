@@ -58,5 +58,17 @@ namespace kixBG.Core.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task<Clothe> GetItemByIdAsync(int id)
+        {
+            return await repository.All<Clothe>()
+                .Where(s => s.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public void SaveChangesAsync()
+        {
+            repository.SaveChangesAsync();
+        }
     }
 }

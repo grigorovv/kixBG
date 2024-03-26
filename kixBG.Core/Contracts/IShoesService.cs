@@ -14,5 +14,7 @@ namespace kixBG.Core.Contracts
         Task<IEnumerable<BrandsServiceModel>> AllBrandsAsync();
         void AddAsync(Shoe shoeToAdd);
         Task<List<ShoeAllModel>> GetAllAsync();
+        Task<Shoe> GetShoeByIdAsync(int id);
+        void SaveChangesAsync();
     }
 }

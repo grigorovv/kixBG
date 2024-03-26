@@ -8,6 +8,7 @@ namespace kixBG.Core.Models.Clothes
 {
     public class ClothesFormModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = requiredMessage)]
         public string ImageURL { get; set; } = null!;
 
