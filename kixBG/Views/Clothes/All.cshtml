@@ -1,4 +1,4 @@
-﻿@model List<ClothesAllModel>
+﻿@model PagedList<ClothesAllModel>
 
 <body>
     <!-- Modal -->
@@ -63,7 +63,7 @@
             <div class="col-lg-9">
 
                 <div class="row">
-                    @foreach(var c in Model) 
+                    @foreach (var c in Model)
                     {
                         <div class="col-md-4">
                             <div class="card mb-4 product-wap rounded-0">
@@ -71,12 +71,12 @@
                                     <img class="card-img rounded-0 img-fluid" src="@c.ImageURL">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a asp-controller="Clothes" asp-action="Details" asp-route-id="@c.Id" class="btn btn-success text-white mt-2" ><i class="far fa-eye"></i></a></li>
+                                            <li><a asp-controller="Clothes" asp-action="Details" asp-route-id="@c.Id" class="btn btn-success text-white mt-2"><i class="far fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <a asp-controller="Clothes" asp-action="Details" asp-route-id="@c.Id" class="h3 text-decoration-none" >@c.Model</a> @*title*@
+                                    <a asp-controller="Clothes" asp-action="Details" asp-route-id="@c.Id" class="h3 text-decoration-none">@c.Model</a> @*title*@
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                         <li class="pt-2">
                                             <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
@@ -89,14 +89,18 @@
                                     <p class="text-center mb-0">@c.Price BGN</p> @*price*@
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     }
                 </div>
             </div>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("All",
+            new { page }))
         </div>
     </div>
     <!-- End Content -->
-
     <!-- Start Brands -->
     <section class="bg-light py-5">
         <div class="container my-4">

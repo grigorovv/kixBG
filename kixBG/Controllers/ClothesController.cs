@@ -6,6 +6,7 @@ using kixBG.Extensions;
 using kixBG.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace kixBG.Controllers
 {
@@ -20,11 +21,13 @@ namespace kixBG.Controllers
             this.sellerService = sellerService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int? page)
         {
             List<ClothesAllModel> allModel = await clothesService.GetAllAsync();
+            int pageSize = 3;
+            int pagenumber = page ?? 1;
 
-            return View(allModel);
+            return View(allModel.ToPagedList(pagenumber, pageSize));
         }
 
         [Authorize]

@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace kixBG.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class SellerController : Controller
     {
         private ISellerService sellerService;
