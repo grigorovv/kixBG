@@ -37,7 +37,7 @@ namespace kixBG.Controllers
         {
             if (await sellerService.ExistsById(User.Id()))
             {
-                return BadRequest();
+                return View("AlreadySeller");
             }
 
             BecomeSellerFormModel model = new BecomeSellerFormModel();
