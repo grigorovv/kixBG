@@ -9,7 +9,7 @@ using X.PagedList;
 
 namespace kixBG.Controllers
 {
-    public class ShoesController : Controller
+    public class ShoesController : BaseController
     {
         private IShoesService shoesService;
         private ISellerService sellerService;
@@ -19,6 +19,8 @@ namespace kixBG.Controllers
             this.shoesService = shoesService;
             this.sellerService = sellerService;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> All(string? brandFilter,string? searchString, int? page)
         {
             List<ShoeAllModel> allModel = await shoesService.GetAllAsync();
@@ -46,7 +48,6 @@ namespace kixBG.Controllers
             return View(allModel.ToPagedList(pagenumber, pageSize));
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -78,7 +79,6 @@ namespace kixBG.Controllers
             return RedirectToAction(nameof(All));
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -129,7 +129,6 @@ namespace kixBG.Controllers
             return RedirectToAction(nameof(All));
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -161,7 +160,6 @@ namespace kixBG.Controllers
             return View(detailModel);
         }
 
-        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             Shoe clotheToDelete = await shoesService.GetShoeByIdAsync(id);
