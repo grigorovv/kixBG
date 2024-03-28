@@ -68,8 +68,12 @@ namespace kixBG.Controllers
             return RedirectToAction(nameof(HomeController.Index));
         }
 
-        public async Task<IActionResult> Profile(int id)
+        public async Task<IActionResult> Profile(string? userId, int id)
         {
+            if (!string.IsNullOrEmpty(userId))
+            {
+                id = await sellerService.GetSellerIdByUserId(userId);
+            }
             Seller sellerToView = await sellerService.GetSellerById(id);
             if (sellerToView == null)
             {
