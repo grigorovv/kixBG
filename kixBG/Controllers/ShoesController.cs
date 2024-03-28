@@ -51,6 +51,11 @@ namespace kixBG.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if (!await sellerService.ExistsById(User.Id()))
+            {
+                return Unauthorized();
+            }
+
             ShoeFormModel formModel = new ShoeFormModel()
             {
                 Brands = await shoesService.AllBrandsAsync()

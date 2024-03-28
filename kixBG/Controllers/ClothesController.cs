@@ -50,6 +50,11 @@ namespace kixBG.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if (!await sellerService.ExistsById(User.Id()))
+            {
+                return Unauthorized();
+            }
+
             ClothesFormModel model = new ClothesFormModel();
 
             model.Categories = await clothesService.AllCategoriesAsync();

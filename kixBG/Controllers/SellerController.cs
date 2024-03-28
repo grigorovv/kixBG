@@ -64,7 +64,7 @@ namespace kixBG.Controllers
             int cityId = cityService.FindByName(model.City);
 
             await sellerService.AddAsync(User.Id(), model.Name, model.PhoneNumber, cityId);
-            return RedirectToAction(nameof(HomeController.Index));
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Profile(string? userId, int id)
