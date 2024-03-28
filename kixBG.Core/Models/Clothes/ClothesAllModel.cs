@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using kixBG.Core.Models.ClothesCategories;
 
 namespace kixBG.Core.Models.Clothes
 {
@@ -14,5 +10,6 @@ namespace kixBG.Core.Models.Clothes
         public string Size { get; set; } = null!;
         public decimal Price { get; set; }
         public int SellerId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

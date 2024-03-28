@@ -19,11 +19,29 @@ namespace kixBG.Controllers
             this.shoesService = shoesService;
             this.sellerService = sellerService;
         }
-        public async Task<IActionResult> All(int? page)
+        public async Task<IActionResult> All(string? brandFilter,string? searchString, int? page)
         {
             List<ShoeAllModel> allModel = await shoesService.GetAllAsync();
             int pageSize = 3;
             int pagenumber = page ?? 1;
+
+            IEnumerable<BrandsServiceModel> brands = await shoesService.AllBrandsAsync();
+
+            if (!string.IsNullOrEmpty(brandFilter))
+            {
+                int brandId = brands.Where(b => b.Name.ToLower() == brandFilter.ToLower())
+                                           .Select(b => b.Id).First();
+
+                allModel = allModel.Where(s => s.BrandId == brandId)
+                                   .ToList();
+            }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allModel = allModel.Where(s => s.Model.ToLower().Contains(searchString.ToLower()))
+                                   .ToList();
+            }
+
+            ViewBag.Brands = brands;
 
             return View(allModel.ToPagedList(pagenumber, pageSize));
         }

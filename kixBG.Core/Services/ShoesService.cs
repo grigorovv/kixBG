@@ -42,7 +42,8 @@ namespace kixBG.Core.Services
                     ImageURL = s.ImageURL,
                     Price = s.Price,
                     Size = s.Size.ToString(),
-                    SellerId = s.SellerId
+                    SellerId = s.SellerId,
+                    BrandId = s.BrandId
                 })
                 .ToListAsync();
         }

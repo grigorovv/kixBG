@@ -14,5 +14,6 @@ namespace kixBG.Core.Models.Shoes
         public string Size { get; set; } = null!;
         public decimal Price { get; set; }
         public int SellerId { get; set; }
+        public int BrandId { get; set; }
     }
 }

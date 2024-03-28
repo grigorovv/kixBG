@@ -21,12 +21,28 @@ namespace kixBG.Controllers
             this.sellerService = sellerService;
         }
 
-        public async Task<IActionResult> All(int? page)
+        public async Task<IActionResult> All(string? categoryFilter, string? searchString, int? page)
         {
             List<ClothesAllModel> allModel = await clothesService.GetAllAsync();
             int pageSize = 3;
             int pagenumber = page ?? 1;
+            IEnumerable<ClothesCategoryServiceModel> categories = await clothesService.AllCategoriesAsync();
 
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                int categoryId = categories.Where(cc => cc.Name.ToLower() == categoryFilter.ToLower())
+                                           .Select(cc => cc.Id).First();
+
+                allModel = allModel.Where(c => c.CategoryId == categoryId)
+                                   .ToList();
+            }
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allModel = allModel.Where(c => c.Model.ToLower().Contains(searchString.ToLower()))
+                                   .ToList();
+            }
+
+            ViewBag.Categories = categories;
             return View(allModel.ToPagedList(pagenumber, pageSize));
         }
 
@@ -131,7 +147,7 @@ namespace kixBG.Controllers
             {
                 return NotFound();
             }
-            
+
 
             IEnumerable<BrandsServiceModel> brands = await clothesService.AllBrandsAsync();
             string brandName = brands.Where(b => b.Id == clotheToCheck.BrandId)
