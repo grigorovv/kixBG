@@ -18,13 +18,19 @@ namespace kixBG.Controllers
         private ICityService cityService;
         private IClothesService clothesService;
         private IShoesService shoesService;
+        private ICountryService countryService;
 
-        public SellerController(ISellerService sellerService, ICityService cityService, IClothesService clothesService, IShoesService shoesService)
+        public SellerController(ISellerService sellerService, 
+            ICityService cityService, 
+            IClothesService clothesService, 
+            IShoesService shoesService, 
+            ICountryService countryService)
         {
             this.sellerService = sellerService;
             this.cityService = cityService;
             this.clothesService = clothesService;
             this.shoesService = shoesService;
+            this.countryService = countryService;
         }
 
         [HttpGet]
@@ -36,7 +42,9 @@ namespace kixBG.Controllers
             }
 
             BecomeSellerFormModel model = new BecomeSellerFormModel();
-            ViewBag.Cities = new SelectList(await cityService.GetAllAsync());
+            List<City> cities = await cityService.GetAllAsync();
+
+            ViewBag.Cities = new SelectList(cities.Select(c => c.Name).ToList());
 
             return View(model);
         }
@@ -74,7 +82,13 @@ namespace kixBG.Controllers
             List<ClothesAllModel> sellerClothes = await clothesService.GetAllAsync();
             sellerClothes = sellerClothes.Where(c => c.SellerId == sellerToView.Id).ToList();
 
-            SellerProfileModel spm = new SellerProfileModel(sellerToView, sellerShoes, sellerClothes);
+            var cities = await cityService.GetAllAsync();
+            City city = cities.Where(c => c.Id == sellerToView.CityId)
+                                       .First();
+
+            var country = await countryService.GetCountryById(city.CountryId);
+
+            SellerProfileModel spm = new SellerProfileModel(sellerToView, sellerShoes, sellerClothes, city.Name, country.Name);
 
             return View(spm);
         }

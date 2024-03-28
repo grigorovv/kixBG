@@ -11,11 +11,17 @@ namespace kixBG.Core.Models.Seller
         public string CountryName { get; set; } = null!;
         public IEnumerable<ShoeAllModel> Shoes { get; set; } = new List<ShoeAllModel>();
         public IEnumerable<ClothesAllModel> Clothes { get; set; } = new List<ClothesAllModel>();
-        public SellerProfileModel(Infrastructure.Data.Entities.Seller seller, List<ShoeAllModel> shoes, List<ClothesAllModel> clothes)
+        public SellerProfileModel(Infrastructure.Data.Entities.Seller seller, 
+            List<ShoeAllModel> shoes, 
+            List<ClothesAllModel> clothes, 
+            string cityName,
+            string countryName)
         {
             Seller = seller;
             Shoes = shoes;
             Clothes = clothes;
+            CityName = cityName;
+            CountryName = countryName;
         }
     }
 }

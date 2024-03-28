@@ -4,12 +4,15 @@
     <div class="container py-5">
         <h1 class="text-center">@Model.Seller.Name Listings</h1>
         <h3 class="text-center"> Phone number: <strong>@Model.Seller.PhoneNumber</strong></h3>
+        <h3 class="text-center"> @Model.CityName, @Model.CountryName</h3>
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
+                <h3 class="h3"> Clothes:</h3>
+
                 <div class="row">
                     @foreach (var c in Model.Clothes)
                     {
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
                                     <img class="card-img rounded-0 img-fluid" src="@c.ImageURL">
@@ -36,10 +39,12 @@
                         </div>
                     }
                 </div>
+
+                <h3 class="h3"> Shoes:</h3>
                 <div class="row">
                     @foreach (var s in Model.Shoes)
                     {
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
                                     <img class="card-img rounded-0 img-fluid" src="@s.ImageURL">

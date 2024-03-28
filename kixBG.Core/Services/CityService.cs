@@ -24,11 +24,10 @@ namespace kixBG.Core.Services
             return repository.FindCityByName(name).First();
         }
 
-        public async Task<List<string>> GetAllAsync()
+        public async Task<List<City>> GetAllAsync()
         {
             return await repository
                 .All<City>()
-                .Select(c => c.Name)
                 .ToListAsync(); 
         }
     }

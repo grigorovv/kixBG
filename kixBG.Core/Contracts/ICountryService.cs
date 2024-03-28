@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace kixBG.Core.Contracts
 {
-    public interface ICityService
+    public interface ICountryService
     {
-        Task<List<City>> GetAllAsync();
-        int FindByName(string name);
+        Task<Country> GetCountryById(int id);
     }
 }
