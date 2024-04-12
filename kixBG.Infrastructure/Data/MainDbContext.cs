@@ -1,8 +1,8 @@
 ﻿using kixBG.Infrastructure.Data.Entities;
 using kixBG.Infrastructure.Data.SeedDB;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace kixBG.Infrastructure.Data
 {
@@ -18,7 +18,7 @@ namespace kixBG.Infrastructure.Data
             builder.ApplyConfiguration(new ClotheCategoryConfiguration());
             builder.ApplyConfiguration(new ClothesConfiguration());
             builder.ApplyConfiguration(new ShoesConfiguration());
-
+            builder.ApplyConfiguration(new AdminUserConfiguration());
 
             base.OnModelCreating(builder);
         }

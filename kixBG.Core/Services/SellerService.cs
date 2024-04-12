@@ -50,7 +50,7 @@ namespace kixBG.Core.Services
             return await repository.AllReadOnly<Seller>()
                 .Where(s => s.UserId == userId)
                 .Select(s => s.Id)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
         }
 
         public async Task<string> GetUserIdBySellerId(int sellerId)

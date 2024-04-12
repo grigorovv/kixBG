@@ -97,7 +97,10 @@ namespace kixBG.Controllers
             {
                 return NotFound();
             }
-            if (clotheToEdit.SellerId != await sellerService.GetSellerIdByUserId(User.Id()))
+
+            int currentSellerId = await sellerService.GetSellerIdByUserId(User.Id());
+
+            if ((currentSellerId == 0 || clotheToEdit.SellerId != currentSellerId) && !User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -182,7 +185,7 @@ namespace kixBG.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Clothe clotheToDelete = await clothesService.GetItemByIdAsync(id);
-            if (clotheToDelete.SellerId != await sellerService.GetSellerIdByUserId(User.Id()))
+            if (clotheToDelete.SellerId != await sellerService.GetSellerIdByUserId(User.Id()) && !User.IsAdmin())
             {
                 return Unauthorized();
             }

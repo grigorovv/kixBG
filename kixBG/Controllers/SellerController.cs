@@ -76,7 +76,7 @@ namespace kixBG.Controllers
             Seller sellerToView = await sellerService.GetSellerById(id);
             if (sellerToView == null)
             {
-                return BadRequest();
+                return RedirectToAction("NotASeller", "Home");
             }
 
             List<ShoeAllModel> sellerShoes = await shoesService.GetAllAsync();

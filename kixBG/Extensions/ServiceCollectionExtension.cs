@@ -45,6 +45,7 @@ namespace kixBG.Extensions.DependencyInjection
                     options.Password.RequireLowercase = true;
                     options.Password.RequireUppercase = true;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MainDbContext>();
 
             return services;

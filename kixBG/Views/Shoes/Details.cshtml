@@ -37,7 +37,7 @@
                                 <a asp-controller="Seller" asp-action="Profile" asp-route-Id="@Model.SellerId" class="btn btn-success btn-lg">Contact Seller</a>
                             </div>
 
-                            @if (@Model.SellerUserId == User.Id())
+                            @if (@Model.SellerUserId == User.Id() || User.IsAdmin() == true)
                             {
                                 <div class="col d-grid">
                                     <a asp-controller="Shoes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-lg"><strong>Edit</strong></a>
