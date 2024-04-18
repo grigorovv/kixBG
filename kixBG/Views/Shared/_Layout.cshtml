@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject ISellerService sellerService
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>kixBG E-Shop</title>
@@ -64,10 +66,16 @@
                             </li>
                             @if (User?.Identity?.IsAuthenticated ?? false)
                             {
-                                @if (User.IsAdmin() == false)
+                                @if (await sellerService.ExistsById(User.Id()))
                                 {
                                     <li class="nav-item">
                                         <a asp-controller="Home" asp-action="ListingCategory" class="nav-link">Add <span class="text-success">listing</span></a>
+                                    </li>
+                                }
+                                else if (!User.IsAdmin())
+                                {
+                                    <li class="nav-item">
+                                        <a asp-controller="Seller" asp-action="Become" class="nav-link">Become a <span class="text-success">seller</span></a>
                                     </li>
                                 }
                             }
@@ -155,7 +163,7 @@
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a asp-controller="Clothes" asp-action="All" class="text-decoration-none">Clothes</a></li>
-                        <li><a asp-controller="Clothes" asp-action="Sports" class="text-decoration-none">Sport Wear</a></li>
+                        <li><a asp-controller="Clothes" asp-action="All" asp-route-categoryFilter="Tracksuit" class="text-decoration-none">Tracksuits</a></li>
                         <li><a asp-controller="Shoes" asp-action="All" class="text-decoration-none">Shoes</a></li>
                     </ul>
                 </div>
@@ -165,7 +173,6 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a asp-controller="Home" asp-action="Index" class="text-decoration-none">Home</a></li>
                         <li><a asp-controller="Home" asp-action="About" class="text-decoration-none">About Us</a></li>
-                        <li><a asp-controller="Home" asp-action="Faq" class="text-decoration-none">FAQs</a></li>
                     </ul>
                 </div>
 
