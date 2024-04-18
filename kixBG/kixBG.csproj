@@ -25,4 +25,8 @@
     <ProjectReference Include="..\kixBG.Core\kixBG.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
 </Project>

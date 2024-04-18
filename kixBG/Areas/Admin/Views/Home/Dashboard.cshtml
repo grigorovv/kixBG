@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="mt-4 p-5 bg-light text-center">
+    <h2 class="display-4">Admin view</h2>
+    <p class="lead mb-1 mt-3">
+       You are currently logged into the <b>Admin</b> account. You are authorized to do everything <b>except</b> add item listings.
+    </p>
+    <p class="lead mt-1"> Shortcuts: </p>
+    <hr class="my-4">
+    <a asp-area="" asp-controller="Clothes" asp-action="All" class="btn btn-primary btn-lg">All Clothes</a>
+    <a asp-area="" asp-controller="Shoes" asp-action="All" class="btn btn-primary btn-lg">All Shoes</a>
+    <span> | </span>
+    <a asp-area="Admin" asp-controller="Sellers" asp-action="All" class="btn btn-primary btn-lg">All Sellers</a>
+</div>

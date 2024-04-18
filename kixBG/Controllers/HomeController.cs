@@ -19,6 +19,11 @@ namespace kixBG.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("Dashboard", "Home", new { area = "Admin" });
+            }
+
             return View();
         }
 

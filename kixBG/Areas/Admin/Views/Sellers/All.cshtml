@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Seller>
+@{
+    ViewBag.Title = "All Sellers";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+<table class="table table-striped">
+    <thead> <tr> <th><label>Full Name</label></th> <th><label>Phone Number</label></th> <th><label>Listings</label></th> </tr> </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            List<ShoeAllModel> sellerShoes = await ViewBag.ShoesService.GetAllAsync();
+            sellerShoes = sellerShoes.Where(s => s.SellerId == user.Id).ToList();
+            List<ClothesAllModel> sellerClothes = await ViewBag.ClothesService.GetAllAsync();
+            sellerClothes = sellerClothes.Where(s => s.SellerId == user.Id).ToList();
+
+            int listingCount = sellerShoes.Count() + sellerClothes.Count();
+
+            <tr>
+                <td><label>@user.Name</label></td>
+                <td><label>@user.PhoneNumber</label></td>
+                <td>
+                    <label>@listingCount</label>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
