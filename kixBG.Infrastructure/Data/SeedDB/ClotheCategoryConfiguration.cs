@@ -6,12 +6,20 @@ namespace kixBG.Infrastructure.Data.SeedDB
 {
     internal class ClotheCategoryConfiguration : IEntityTypeConfiguration<ClotheCategory>
     {
+        private bool seed;
+
+        public ClotheCategoryConfiguration(bool _seed)
+        {
+            seed = _seed;
+        }
         public void Configure(EntityTypeBuilder<ClotheCategory> builder)
         {
-            var data = new SeedCategories();
-
-            builder.HasData(new ClotheCategory[] 
+            if (seed)
             {
+                var data = new SeedCategories();
+
+                builder.HasData(new ClotheCategory[]
+                {
                 data.TShirt,
                 data.Belt,
                 data.Sweatshirt,
@@ -20,7 +28,8 @@ namespace kixBG.Infrastructure.Data.SeedDB
                 data.Jeans,
                 data.Tracksuit,
                 data.Other
-            });
+                });
+            }
         }
     }
 }

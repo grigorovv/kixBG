@@ -10,6 +10,6 @@ namespace kixBG.Core.Contracts
     public interface ICityService
     {
         Task<List<City>> GetAllAsync();
-        int FindByName(string name);
+        int FindIdByName(string name);
     }
 }

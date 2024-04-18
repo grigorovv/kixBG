@@ -9,6 +9,6 @@ namespace kixBG.Core.Contracts
 {
     public interface ICountryService
     {
-        Task<Country> GetCountryById(int id);
+        Task<Country> GetCountryByIdAsync(int id);
     }
 }

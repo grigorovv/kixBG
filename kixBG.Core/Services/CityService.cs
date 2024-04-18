@@ -19,7 +19,7 @@ namespace kixBG.Core.Services
             this.repository = repository;
         }
 
-        public int FindByName(string name)
+        public int FindIdByName(string name)
         {
             return repository.FindCityByName(name).First();
         }

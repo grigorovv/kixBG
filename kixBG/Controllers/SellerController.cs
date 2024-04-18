@@ -61,7 +61,7 @@ namespace kixBG.Controllers
                 return View(model);
             }
 
-            int cityId = cityService.FindByName(model.City);
+            int cityId = cityService.FindIdByName(model.City);
 
             await sellerService.AddAsync(User.Id(), model.Name, model.PhoneNumber, cityId);
             return RedirectToAction("Index", "Home");
@@ -89,7 +89,7 @@ namespace kixBG.Controllers
             City city = cities.Where(c => c.Id == sellerToView.CityId)
                                        .First();
 
-            var country = await countryService.GetCountryById(city.CountryId);
+            var country = await countryService.GetCountryByIdAsync(city.CountryId);
 
             SellerProfileModel spm = new SellerProfileModel(sellerToView, sellerShoes, sellerClothes, city.Name, country.Name);
 

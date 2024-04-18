@@ -8,17 +8,28 @@ namespace kixBG.Infrastructure.Data
 {
     public class MainDbContext : IdentityDbContext
     {
+        private bool seedDatabase; 
+
         public MainDbContext(DbContextOptions<MainDbContext> options)
             : base(options)
         {
+            if (Database.IsRelational())
+            {
+                Database.Migrate();
+                seedDatabase = true;
+            }
+            else
+            {
+                seedDatabase = false;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new ClotheCategoryConfiguration());
+            builder.ApplyConfiguration(new ClotheCategoryConfiguration(seedDatabase));
             builder.ApplyConfiguration(new ClothesConfiguration());
             builder.ApplyConfiguration(new ShoesConfiguration());
-            builder.ApplyConfiguration(new AdminUserConfiguration());
+            builder.ApplyConfiguration(new AdminUserConfiguration(seedDatabase));
 
             base.OnModelCreating(builder);
         }

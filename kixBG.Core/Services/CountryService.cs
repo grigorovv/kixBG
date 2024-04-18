@@ -13,7 +13,7 @@ namespace kixBG.Core.Services
         {
             this.repository = repository;
         }
-        public async Task<Country> GetCountryById(int id)
+        public async Task<Country> GetCountryByIdAsync(int id)
         {
             return await repository.All<Country>()
                 .Where(c => c.Id == id)
